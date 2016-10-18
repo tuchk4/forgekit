@@ -1,4 +1,5 @@
-import { PropTypes } from 'react';
+const React = require('react');
+const PropTypes = React.PropTypes;
 
 const featureFlags = ({
   alert,
@@ -36,4 +37,4 @@ featureFlags.defaultProps = {
   warning: false
 };
 
-export default featureFlags;
+module.exports = featureFlags;

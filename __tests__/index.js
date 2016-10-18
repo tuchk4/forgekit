@@ -1,15 +1,15 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+const React = require('react');
+const renderer = require('react-test-renderer');
 
-import enchantWithFeatures from '../lib';
+const enchantWithFeatures = require('../lib');
 
 // original component
-import Button from './components/button';
+const Button = require('./components/button');
 
 // features
-import icon from './components/button/features/icon';
-import clickValue from './components/button/features/click-value';
-import highlightFlags from './components/features/highlite-flags';
+const icon = require('./components/button/features/icon');
+const clickValue = require('./components/button/features/click-value');
+const highlightFlags = require('./components/features/highlite-flags');
 
 describe('enchant components with features', () => {
   it('should call feature functions in correct order', () => {

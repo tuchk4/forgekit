@@ -1,4 +1,5 @@
-import { PropTypes } from 'react';
+const React = require('react');
+const PropTypes = React.PropTypes;
 
 const clickValue = ({
   clickValue,
@@ -16,4 +17,4 @@ clickValue.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default clickValue;
+module.exports = clickValue;

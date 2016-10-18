@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+const React = require('react');
+const PropTypes = React.PropTypes;
 
 const Button = ({
   children,
@@ -15,4 +16,4 @@ Button.defaultProps = {
   disabled: false
 };
 
-export default Button;
+module.exports = Button;

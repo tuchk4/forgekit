@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+const React = require('react');
+const PropTypes = React.PropTypes;
 
 const featureIcon = ({
   icon,
@@ -27,4 +28,4 @@ featureIcon.defaultProps = {
   iconPosition: 'left'
 };
 
-export default featureIcon;
+module.exports = featureIcon;
