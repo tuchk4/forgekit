@@ -1,0 +1,7 @@
+node_modules
+.DS_Store
+.idea
+npm-debug.log
+/coverage
+.vscode/
+/index.js
