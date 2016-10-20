@@ -1,31 +1,26 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+import { PropTypes } from 'react';
 
-const featureIcon = ({
+const iconFeature = ({
   icon,
   iconPosition,
   children,
   ...props
-}) => {
-  return {
-    ...props,
-    children: (
-      <div>
-        {iconPosition === 'left' ? icon : null}
-        {children}
-        {iconPosition === 'right' ? icon : null}
-      </div>
-    )
-  }
-};
+}) => ({
+  ...props,
+  children: [
+    iconPosition === 'left' ? icon : null,
+    children,
+    iconPosition === 'right' ? icon : null,
+  ],
+});
 
-featureIcon.propTypes = {
+iconFeature.propTypes = {
   icon: PropTypes.string,
   iconPosition: PropTypes.string,
 };
 
-featureIcon.defaultProps = {
-  iconPosition: 'left'
+iconFeature.defaultProps = {
+  iconPosition: 'left',
 };
 
-module.exports = featureIcon;
+export default iconFeature;

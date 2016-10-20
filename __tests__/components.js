@@ -1,15 +1,15 @@
-const React = require('react');
-const renderer = require('react-test-renderer');
+import React from 'react';
+import renderer from 'react-test-renderer';
 
-const enchantWithFeatures = require('../lib');
+import enchantWithFeatures from '../lib';
 
 // original component
-const Button = require('./components/button');
+import Button from './components/button';
 
 // features
-const icon = require('./components/button/features/icon');
-const clickValue = require('./components/button/features/click-value');
-const highlightFlags = require('./components/features/highlite-flags');
+import icon from './components/button/features/icon';
+import clickValue from './components/button/features/click-value';
+import highlightFlags from './components/features/highlite-flags';
 
 describe('components tests', () => {
   it('enchanted properties', () => {
@@ -20,10 +20,10 @@ describe('components tests', () => {
       alert: true,
       clickValue: 'yo',
       iconPosition: 'right',
-      icon: 'mail'
+      icon: 'mail',
     };
 
-    const component = renderer.create(<FeaturesButton {...initialProps}/>);
+    const component = renderer.create(<FeaturesButton {...initialProps} />);
     const tree = component.toJSON();
 
     const propsKeys = Object.keys(tree.props);
@@ -37,7 +37,7 @@ describe('components tests', () => {
 
 
     expect(tree.props.style).toEqual({
-      color: 'red'
+      color: 'red',
     });
   });
 
@@ -49,10 +49,10 @@ describe('components tests', () => {
 
     const initialProps = {
       clickValue: 'yo',
-      onClick: onClickMock
+      onClick: onClickMock,
     };
 
-    const component = renderer.create(<FeaturesButton {...initialProps}/>);
+    renderer.create(<FeaturesButton {...initialProps} />);
     // to test arguments for onClick callbacck we should use enzyme.shallow
     // expect(onClickMock.mock.calls[0][0]).toEqual(initialProps.clickValue);
   });

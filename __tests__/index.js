@@ -1,15 +1,15 @@
-const React = require('react');
-const renderer = require('react-test-renderer');
+import React from 'react';
+import renderer from 'react-test-renderer';
 
-const enchantWithFeatures = require('../lib');
+import enchantWithFeatures from '../lib';
 
 // original component
-const Button = require('./components/button');
+import Button from './components/button';
 
 // features
-const icon = require('./components/button/features/icon');
-const clickValue = require('./components/button/features/click-value');
-const highlightFlags = require('./components/features/highlite-flags');
+import icon from './components/button/features/icon';
+import clickValue from './components/button/features/click-value';
+import highlightFlags from './components/features/highlite-flags';
 
 describe('enchant components with features', () => {
   it('should call feature functions in correct order', () => {
@@ -43,7 +43,7 @@ describe('enchant components with features', () => {
       ...Button.propTypes,
       ...icon.propTypes,
       ...clickValue.propTypes,
-      ...highlightFlags.propTypes
+      ...highlightFlags.propTypes,
     });
   });
 
@@ -62,37 +62,33 @@ describe('enchant components with features', () => {
       ...Button.defaultProps,
       ...icon.defaultProps,
       ...clickValue.defaultProps,
-      ...highlightFlags.defaultProps
+      ...highlightFlags.defaultProps,
     });
   });
 
   it('should pass converted properties to each next feature', () => {
-    const featureMock1 = jest.fn(props => {
+    const featureMock1 = jest.fn((props) => {
       return {
         mock1Foo: props.foo,
         mock1Bar: props.bar,
         foo: props.foo + 1,
-        bar: props.bar + 1
+        bar: props.bar + 1,
       };
     });
 
-    const featureMock2 = jest.fn(props => {
-      return {
-        mock2Foo: props.foo,
-        mock2Bar: props.bar,
-        foo: props.foo + 1,
-        bar: props.bar + 1
-      };
-    });
+    const featureMock2 = jest.fn(props => ({
+      mock2Foo: props.foo,
+      mock2Bar: props.bar,
+      foo: props.foo + 1,
+      bar: props.bar + 1,
+    }));
 
-    const featureMock3 = jest.fn(props => {
-      return {
-        mock3Foo: props.foo,
-        mock3Bar: props.bar,
-        foo: props.foo + 1,
-        bar: props.bar + 1
-      };
-    });
+    const featureMock3 = jest.fn(props => ({
+      mock3Foo: props.foo,
+      mock3Bar: props.bar,
+      foo: props.foo + 1,
+      bar: props.bar + 1,
+    }));
 
     const features = enchantWithFeatures(featureMock1, featureMock2, featureMock3);
 
@@ -100,10 +96,10 @@ describe('enchant components with features', () => {
 
     const initialProps = {
       foo: 1,
-      bar: '1'
+      bar: '1',
     };
 
-    const component = renderer.create(<FeaturesButton {...initialProps}/>);
+    const component = renderer.create(<FeaturesButton {...initialProps} />);
     const tree = component.toJSON();
 
     expect(tree.props).toEqual({
@@ -111,27 +107,27 @@ describe('enchant components with features', () => {
       bar: '1111',
       mock3Foo: 3,
       mock3Bar: '111',
-      ...FeaturesButton.defaultProps
+      ...FeaturesButton.defaultProps,
     });
 
     expect(featureMock1.mock.calls[0][0]).toEqual({
       foo: 1,
       bar: '1',
-      ...FeaturesButton.defaultProps
+      ...FeaturesButton.defaultProps,
     });
 
     expect(featureMock2.mock.calls[0][0]).toEqual({
       foo: 2,
       bar: '11',
       mock1Foo: 1,
-      mock1Bar: '1'
+      mock1Bar: '1',
     });
 
     expect(featureMock3.mock.calls[0][0]).toEqual({
       foo: 3,
       bar: '111',
       mock2Foo: 2,
-      mock2Bar: '11'
+      mock2Bar: '11',
     });
   });
 });

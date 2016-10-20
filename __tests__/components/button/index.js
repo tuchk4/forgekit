@@ -1,19 +1,17 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+import React, { PropTypes } from 'react';
 
 const Button = ({
   children,
   ...props
-}) => {
-  return <button {...props}>{children}</button>;
-};
+}) => <button {...props}>{children}</button>;
 
 Button.propTypes = {
-  disabled: PropTypes.bool
+  children: PropTypes.node,
+  disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
-  disabled: false
+  disabled: false,
 };
 
-module.exports = Button;
+export default Button;

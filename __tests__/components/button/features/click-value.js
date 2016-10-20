@@ -1,20 +1,17 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+import { PropTypes } from 'react';
 
-const clickValue = ({
+const clickValueFeature = ({
   clickValue,
   onClick = () => {},
   ...props
-}) => {
-  return {
-    ...props,
-    onClick: e => onClick(clickValue, e)
-  }
-};
+}) => ({
+  ...props,
+  onClick: e => onClick(clickValue, e),
+});
 
-clickValue.propTypes = {
+clickValueFeature.propTypes = {
   clickValue: PropTypes.any,
   onClick: PropTypes.func,
 };
 
-module.exports = clickValue;
+export default clickValueFeature;

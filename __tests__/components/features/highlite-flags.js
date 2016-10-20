@@ -1,7 +1,6 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+import { PropTypes } from 'react';
 
-const featureFlags = ({
+const flagsFeature = ({
   alert,
   warning,
   ...props
@@ -10,11 +9,11 @@ const featureFlags = ({
 
   if (alert) {
     style = {
-      color: 'red'
+      color: 'red',
     };
   } else if (warning) {
     style = {
-      color: 'yellow'
+      color: 'yellow',
     };
   }
 
@@ -22,19 +21,19 @@ const featureFlags = ({
     ...props,
     style: {
       ...(props.style || {}),
-      ...style
-    }
-  }
+      ...style,
+    },
+  };
 };
 
-featureFlags.propTypes = {
+flagsFeature.propTypes = {
   alert: PropTypes.bool,
   warning: PropTypes.bool,
 };
 
-featureFlags.defaultProps = {
+flagsFeature.defaultProps = {
   alert: false,
-  warning: false
+  warning: false,
 };
 
-module.exports = featureFlags;
+export default flagsFeature;
