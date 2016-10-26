@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import enchantWithFeatures from '../lib';
+import forge from '../lib';
 
 // original component
 import Button from './components/button';
@@ -12,8 +12,8 @@ import clickValue from './components/button/features/click-value';
 import highlightFlags from './components/features/highlite-flags';
 
 describe('components tests', () => {
-  it('enchanted properties', () => {
-    const features = enchantWithFeatures(icon, clickValue, highlightFlags);
+  it('forgeed properties', () => {
+    const features = forge(icon, clickValue, highlightFlags);
     const FeaturesButton = features(Button, 'FeaturesButton');
 
     const initialProps = {
@@ -44,7 +44,7 @@ describe('components tests', () => {
   it('simulate click with clickValue feature', () => {
     const onClickMock = jest.fn();
 
-    const features = enchantWithFeatures(clickValue, highlightFlags);
+    const features = forge(clickValue, highlightFlags);
     const FeaturesButton = features(Button, 'FeaturesButton');
 
     const initialProps = {

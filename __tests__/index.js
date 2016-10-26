@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import enchantWithFeatures from '../lib';
+import forge from '../lib';
 
 // original component
 import Button from './components/button';
@@ -11,7 +11,7 @@ import icon from './components/button/features/icon';
 import clickValue from './components/button/features/click-value';
 import highlightFlags from './components/features/highlite-flags';
 
-describe('enchant components with features', () => {
+describe('forge components with features', () => {
   it('should call feature functions in correct order', () => {
     const order = [];
     const featureMock1 = jest.fn(() => {
@@ -26,7 +26,7 @@ describe('enchant components with features', () => {
       order.push('mock3');
     });
 
-    const features = enchantWithFeatures(featureMock1, featureMock2, featureMock3);
+    const features = forge(featureMock1, featureMock2, featureMock3);
 
     const FeaturesButton = features(Button);
 
@@ -36,7 +36,7 @@ describe('enchant components with features', () => {
   });
 
   it('should should merge component propTypes with features propTypes', () => {
-    const features = enchantWithFeatures(icon, clickValue, highlightFlags);
+    const features = forge(icon, clickValue, highlightFlags);
     const FeaturesButton = features(Button);
 
     expect(FeaturesButton.propTypes).toEqual({
@@ -48,14 +48,14 @@ describe('enchant components with features', () => {
   });
 
   it('should set displayName correctly', () => {
-    const features = enchantWithFeatures(icon, clickValue, highlightFlags);
+    const features = forge(icon, clickValue, highlightFlags);
     const FeaturesButton = features(Button, 'NewFeaturedButton');
 
     expect(FeaturesButton.displayName).toEqual('NewFeaturedButton');
   });
 
   it('should merge defaultProps', () => {
-    const features = enchantWithFeatures(icon, clickValue, highlightFlags);
+    const features = forge(icon, clickValue, highlightFlags);
     const FeaturesButton = features(Button);
 
     expect(FeaturesButton.defaultProps).toEqual({
@@ -90,7 +90,7 @@ describe('enchant components with features', () => {
       bar: props.bar + 1,
     }));
 
-    const features = enchantWithFeatures(featureMock1, featureMock2, featureMock3);
+    const features = forge(featureMock1, featureMock2, featureMock3);
 
     const FeaturesButton = features(Button);
 
