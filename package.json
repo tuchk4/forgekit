@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel ./lib --out-dir ./",
+    "dev": "babel --watch ./lib --out-dir ./",
     "prepublish": "npm run build",
     "clear": "rimraf index.js",
     "test": "jest --coverage",
@@ -37,8 +38,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
-    "jest": "^16.0.1",
-    "react": "^15.3.2",
+    "jest": "^17.0.0",
     "react-test-renderer": "^15.3.2",
     "rimraf": "^2.5.4"
   },
@@ -47,7 +47,11 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "__tests__/components/"
+      "__tests__/components/",
+      "__tests__/utils/"
     ]
+  },
+  "dependencies": {
+    "warning": "^3.0.0"
   }
 }

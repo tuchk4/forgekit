@@ -11,22 +11,27 @@ describe('postForg feature', () => {
     const order = [];
     const featureMock1 = jest.fn(() => {
       order.push('mock1');
+      return {};
     });
 
     featureMock1.postForge = () => {
       order.push('postForge mock1');
+      return {};
     };
 
     const featureMock2 = jest.fn(() => {
       order.push('mock2');
+      return {};
     });
 
     featureMock2.postForge = () => {
       order.push('postForge mock2');
+      return {};
     };
 
     const featureMock3 = jest.fn(() => {
       order.push('mock3');
+      return {};
     });
 
     const features = forge(featureMock1, featureMock2, featureMock3);
@@ -35,6 +40,10 @@ describe('postForg feature', () => {
 
     renderer.create(<FeaturesButton />);
 
+    /**
+     * Features are called as they defined at forge.
+     * postForge feature's functions are called after all features
+     */
     expect(order).toEqual([
       'mock1',
       'mock2',
