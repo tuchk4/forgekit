@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import renderer from 'react-test-renderer';
 
-import forge from '../lib';
+import forge, { ThemeProp } from '../lib';
 
 // original component
 import Button from './components/button';
@@ -185,7 +185,50 @@ describe('Forge components with features', () => {
     });
   });
 
-  it('Should log warnings if there are duplicated theme keys', () => {
+  it('Should override propeties', () => {
+    const AwesomeComponent = jest.fn(() => <div>Hello</div>);
+    AwesomeComponent.propTypes = {
+      foo: PropTypes.string,
+      theme: ThemeProp({
+        base: PropTypes.string,
+      }),
+    };
 
+    AwesomeComponent.defaultProps = {
+      foo: 'defaultFoo',
+      theme: {
+        base: 'base',
+      },
+    };
+
+    const feature = props => ({ ...props });
+    const ForgedComponent1 = forge(feature)(AwesomeComponent, 'AwesomeComponent', {
+      foo: 'overridenFoo',
+      theme: {
+        base: 'overridenBase',
+      },
+    });
+
+    renderer.create(<ForgedComponent1 />);
+
+    expect(AwesomeComponent.mock.calls[0][0]).toEqual({
+      foo: 'overridenFoo',
+      theme: {
+        base: 'overridenBase',
+      },
+    });
+
+    const ForgedComponent2 = forge(feature)(AwesomeComponent, 'AwesomeComponent', {
+      foo: 'overridenFoo',
+    });
+
+    renderer.create(<ForgedComponent2 />);
+
+    expect(AwesomeComponent.mock.calls[1][0]).toEqual({
+      foo: 'overridenFoo',
+      theme: {
+        base: 'base',
+      },
+    });
   });
 });
