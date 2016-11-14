@@ -5,7 +5,7 @@ import forge, { ThemeProp } from '../lib';
 
 console.error = jest.genMockFn();
 
-describe('Theme property', () => {
+describe('Release 1.2.0: Theme property', () => {
   beforeEach(() => {
     console.error.mockReset();
   });
