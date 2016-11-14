@@ -3,9 +3,6 @@ import renderer from 'react-test-renderer';
 
 import forge from '../lib';
 
-// original component
-import Button from './components/button';
-
 describe('postForg feature', () => {
   it('should call features and postForge in corret order', () => {
     const order = [];
@@ -35,10 +32,10 @@ describe('postForg feature', () => {
     });
 
     const features = forge(featureMock1, featureMock2, featureMock3);
+    const AwesomeComponent = () => <div>Hello</div>;
+    const ForgedComponent = features(AwesomeComponent);
 
-    const FeaturesButton = features(Button);
-
-    renderer.create(<FeaturesButton />);
+    renderer.create(<ForgedComponent />);
 
     /**
      * Features are called as they defined at forge.
