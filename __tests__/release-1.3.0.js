@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 
 import forge, { ThemeProp } from '../lib';
 
-
 describe('Release 1.3.0: readonly propTypes and defaultProps + wihtProps as func', () => {
   it('Should throw error when set defaultProps', () => {
     const featureMock1 = jest.fn(() => {});
@@ -13,19 +12,19 @@ describe('Release 1.3.0: readonly propTypes and defaultProps + wihtProps as func
 
     expect(() => {
       ForgedComponent.defaultProps = {};
-    }).toThrow(`Forge <${AwesomeComponent.name}/>: deafultProps attribute is readonly`);
+    }).toThrow(`Forgekit <${AwesomeComponent.name}/>: defaultProps attribute is readonly`);
   });
 
 
   it('Should throw error when set propTypes', () => {
     const featureMock1 = jest.fn(props => props);
     const AwesomeComponent = () => <div>Hello</div>;
-    const features = forge(featureMock1, 'AwesomeComponent', []);
+    const features = forge(featureMock1);
     const ForgedComponent = features(AwesomeComponent);
 
     expect(() => {
       ForgedComponent.propTypes = {};
-    }).toThrow(`Forge <${AwesomeComponent.name}/>: propTypes attribute is readonly`);
+    }).toThrow(`Forgekit <${AwesomeComponent.name}/>: propTypes attribute is readonly`);
   });
 
   it('Should throw error when wrong "withProps"', () => {
@@ -36,34 +35,7 @@ describe('Release 1.3.0: readonly propTypes and defaultProps + wihtProps as func
     expect(() => {
       const ForgedComponent = features(AwesomeComponent, 'AwesomeComponent', 100500);
       renderer.create(<ForgedComponent />);
-    }).toThrow(`Forge <${AwesomeComponent.name}/>: "withProps" argument should be Object or Function`);
-  });
-
-  it('Should throw error if feature is not a fucntion"', () => {
-    const feature1 = () => ({});
-    const feature2 = [];
-
-    const AwesomeComponent = () => <div>Hello</div>;
-    const features = forge(feature1, feature2);
-    const ForgedComponent = features(AwesomeComponent);
-
-    expect(() => {
-      renderer.create(<ForgedComponent />);
-    }).toThrow(`Forge <${AwesomeComponent.name}/>: "${feature2.name}" feature should be Function`);
-  });
-
-  it('Should throw error if postForge is not a fucntion"', () => {
-    const feature1 = () => ({});
-    const feature2 = () => ({});
-    feature2.postForge = [];
-
-    const AwesomeComponent = () => <div>Hello</div>;
-    const features = forge(feature1, feature2);
-    const ForgedComponent = features(AwesomeComponent);
-
-    expect(() => {
-      renderer.create(<ForgedComponent />);
-    }).toThrow(`Forge <${AwesomeComponent.name}/>: "${feature2.name}" postForge should be Function`);
+    }).toThrow(`Forgekit <${AwesomeComponent.name}/>: "mountedProps" argument should be Object or Function`);
   });
 
   it('wihtProps Should process props as function', () => {

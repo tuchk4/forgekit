@@ -5,5 +5,7 @@ npm-debug.log
 /coverage
 .vscode/
 /index.js
-/collect-props.js
-/theme-prop.js
+/forgekit-error.js
+/features
+/theme
+/utils

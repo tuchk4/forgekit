@@ -3,13 +3,7 @@ import renderer from 'react-test-renderer';
 
 import forge, { ThemeProp } from '../lib';
 
-console.error = jest.genMockFn();
-
 describe('Release 1.2.0: Theme property', () => {
-  beforeEach(() => {
-    console.error.mockReset();
-  });
-
   it('Feature should returns only object', () => {
     const featureMock1 = jest.fn(() => {});
     const AwesomeComponent = () => <div>Hello</div>;
@@ -18,7 +12,7 @@ describe('Release 1.2.0: Theme property', () => {
 
     expect(() => {
       renderer.create(<ForgedComponent />);
-    }).toThrow(`Forge <${AwesomeComponent.name}/>: "${featureMock1.name}" feature should return Object`);
+    }).toThrow(`Forgekit <${AwesomeComponent.name}/>: "${featureMock1.name}" feature should return Object`);
   });
 
   it('Should throw Error if theme is wrong type', () => {
@@ -38,7 +32,7 @@ describe('Release 1.2.0: Theme property', () => {
      */
     expect(() => {
       features(AwesomeComponent);
-    }).toThrow(`Forge <${AwesomeComponent.name}/>: property "theme" should be the ThemeProp type`);
+    }).toThrow(`Forgekit <${AwesomeComponent.name}/>: property "theme" should be the ThemeProp type`);
   });
 
   it('Should merge all theme prop from all features', () => {
@@ -127,31 +121,6 @@ describe('Release 1.2.0: Theme property', () => {
     expect(featureMock2.mock.calls[0][0].theme).toEqual({
       bar: 'bar',
     });
-  });
-
-  it('Should log warnings if there are duplicated theme keys', () => {
-    const featureMock1 = jest.fn(() => {});
-    featureMock1.propTypes = {
-      theme: ThemeProp({
-        foo: PropTypes.string,
-      }),
-    };
-
-    const featureMock2 = jest.fn(() => {});
-    featureMock2.propTypes = {
-      theme: ThemeProp({
-        foo: PropTypes.string,
-      }),
-    };
-
-    const features = forge(featureMock1, featureMock2);
-    const AwesomeComponent = () => <div>Hello</div>;
-
-    features(AwesomeComponent);
-
-    expect(console.error.mock.calls.length).toEqual(1);
-    // beacuse of theme key "foo" exists at both featureMock1 and featureMock2
-    expect(console.error.mock.calls[0][0]).toEqual(`Warning: Forge <${AwesomeComponent.name}/>: Theme key "foo" was already defined at "${featureMock1.name}" and duplicated at "${featureMock2.name}"`);
   });
 
   it('Should pass default theme values', () => {

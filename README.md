@@ -39,7 +39,7 @@ Feature.postForge = function(props): newProps;
 
 * Feature - function that accept properties and return new properties
 * Feature.propTypes - same as React component *propTypes*
-* Feature.defaultProps - same as React component *deafultProps*
+* Feature.defaultProps - same as React component *defaultProps*
 * Feature.postForge - function that is executed after all features have been applied. Accept properties and return new properties
 
 ## Forgekit api
