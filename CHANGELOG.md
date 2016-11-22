@@ -66,7 +66,7 @@ import { ThemeProp } from 'forgekit';
 import styles from './style.css';
 
 const AwesomeComponent = () => {
-  return <div>...</div?
+  return <div>...</div/>
 };
 
 AwesomeComponent.propTypes = {
