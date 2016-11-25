@@ -35,7 +35,7 @@ Feature = function(props): newProps;
 Feature.propTypes = {}
 Feature.defaultProps = {}
 
-// is equals to
+// is same with
 
 Feature = {
   props: function(props): newProps;

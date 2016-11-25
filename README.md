@@ -29,7 +29,7 @@ And in all cases **high-level** props always affects on **low-level** props. Tha
 
 It is looks like props middlewares (or like props micro services :tada:). This way does not generate higher order components so it will not affect on performance.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/props-as-middleware.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/props-as-middleware.png">
 
 Feature function signature:
 
@@ -89,7 +89,7 @@ export const RippleButton = features(Component, 'RippleButton', {
 
 Function definition is useful when need to define props that depends on another props.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/props-as-middleware-with-props.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/props-as-middleware-with-props.png">
 
 ```js
 export default forge(...features)(Component, 'Button', ({

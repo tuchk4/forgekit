@@ -1,93 +1,180 @@
 ## Forgekit theme api
 
-Supporting css modules.
+Allows to define feature or component theme structure and then process it into component's *classNames* or *style*.
+Theme structure should be defined at the *propTypes*.
+Default theme values should be defined at *defaultProps*.
+
+All defined themes will be merged in the ForgedComponent.
+Each feature or component will receive only defined theme structure.
+
 ```js
 import { ThemeProp } from 'forgekit';
-import styles from './style.css';
 
-const AwesomeComponent = ({theme, children}) => {
-  const classList = classnames(theme.base, theme.style);
-  return <div className={classList}>{children}<div/>
+Feature1.propTypes = {
+  theme: ThemeProp({
+    feature1: PropTypes.string
+  })
 };
 
-AwesomeComponent.propTypes = {
+Feature2.propTypes = {
   theme: ThemeProp({
+    feature2: PropTypes.string
+  })
+};
+
+const ForgedComponent = forge(Feature1, Feature2)(Component);
+
+expect(ForgedComponent.propTypes.theme).toEqual({
+  ...Feature1.propTypes.theme,
+  ...Feature2.propTypes.theme,
+});
+```
+
+**What is the ThemeProp?**
+
+It is same as *PropTypes.shape* but there is the static attribute that contains all defined attributes. Forgekit needs it for theme merging.
+
+```js
+const ThemeProp = theme => {
+  const themeShape = PropTypes.shape(theme);
+  themeShape.themeKeys = Object.keys(theme);
+
+  return themeShape;
+}
+```
+
+## className Example
+
+For better experience suggest to use [classnames](https://www.npmjs.com/package/classnames) library.
+
+* Define component's theme structure
+
+```js
+import { ThemeProp } from 'forgekit';
+
+import classnames from 'classnames';
+import buttonStyles from './style.css';
+
+const Button = ({theme, children, className, ...props}) => {
+  const classList = classnames(className, theme.base, theme.design);
+  return <button className={classList} {...props}>{children}<button/>
+};
+
+Button.propTypes = {
+  theme: ThemeProp({
+    // "base" determine default button rules such as cursor, white-space, overflow, align etc.
     base: PropTypes.string,
-    style: PropTypes.string,
+    // "design" determine how button looks
+    design: PropTypes.string,
   }),
 };
 
-AwesomeComponent.defaultProps = {
+Button.defaultProps = {
   theme: {
-    base: styles.base,
-    style: styles.style,
+    base: buttonStyles.base,
   },
 };
-
 ```
 
-```js
-import { ThemeProp } from 'forgekit';
-import styles from './style.css';
+* Define feature's theme structure
 
-const whiteFrame = ({className, z, theme, ...props}) => {
+```js
+import styles from './alert.css';
+
+const Alert = ({alert, className, ...props}) => {
   return {
     ...props,
     className: classnames(className, {
-      [theme.whiteframe]: z
-      [`${styles.whiteframe}-${z}dp`]: z
-    })
+      theme.alert: alert
+    });
   }
-}
+};
 
-whiteFrame.propTypes = {
-  z: PropTypes.number,
-  theme: ThemeProp({
-    whiteframe: PropTypes.string,
+Alert.propTypes = {
+  theme: TemeProp({
+    alert: PropTypes.string
   })
-}
+};
 
-whiteFrame.defaultProps = {
-  z: 0,
+Alert.defaultprops = {
   theme: {
-    whiteframe: styles.whiteframe
+    alert: syles.alert
   }
-}
+};
 ```
 
-All theme keys will be merged in ForgedComponent
+* Override theme values while forging
 
 ```js
-const ForgedComponent = forgekit(whiteFrame)(AwesomeComponent);
-expect(ForgedComponent.propTypes).toEqual({
-  theme: {
-    whiteframe: PropTypes.string,,
-    base: PropTypes.string,
-    style: PropTypes.string
-  }
-})
-```
+import materialButtonStyles from './material-button.css';
 
-Customize theme properties:
-```js
-import customStyles from './custom-styles.css';
-
-const ForgedComponent = forgekit(whiteFrame)(AwesomeComponent, 'ForgedComponent', {
+const MaterialButton = fogrkit(Alert)(Button, 'MaterialButton', {
   theme: {
-    whiteframe: customStyles.whiteFrame
+    // could override any default theme
+    design: materialButtonStyles.materialButton,
+    alert: materialButtonStyles.materialAlert
   }
 });
 ```
 
-or event dynamic customization
-```js
-import customStyles from './custom-styles.css';
+* Forge and use theme prop
 
-const ForgedComponent = forgekit(whiteFrame)(AwesomeComponent, 'ForgedComponent', (props) => {
-  return {
-    theme: {
-      whiteframe: props.alert ? customStyles.alertWhiteFrame : customStyles.whiteFrame
-    }
+```js
+import materialButtonStyles from './material-button.css';
+
+const MeterialComponent = fogrkit(Alert)(Button);
+
+const theme = {
+  design: materialButtonStyles.materialButton,
+  alert: materialButtonStyles.materialAlert
+};
+
+<MaterialButton theme={theme}>Hello</MaterialButton>
+```
+
+
+## styles Example
+
+It is same as example with classNames expect:
+
+* *Object.assign* or [object spread](https://github.com/sebmarkbage/ecmascript-rest-spread) instead of *classnames*
+* Define props as *PropTypes.object* or even *PropTypes.shape({...})*  instead of *PropTypes.string*
+
+```js
+import { ThemeProp } from 'forgekit';
+
+import classnames from 'classnames';
+
+const buttonStyles = {
+  base: {
+    position: 'relative',
+    overflow: 'hidden',
+    // ...
   }
-});
+};
+
+const Button = ({theme, children, style, ...props}) => {
+  const completeStyle = {
+    ...style,
+    ...theme.base,
+    ...theme.design
+  };
+
+  return <button style={completeStyle} {...props}>{children}<button/>
+};
+
+Button.propTypes = {
+  theme: ThemeProp({
+    // "base" determine default button rules such as cursor, white-space, overflow, align etc.
+    base: PropTypes.object,
+    // "design" determine how button looks
+    design: PropTypes.object,
+  }),
+};
+
+Button.defaultProps = {
+  theme: {
+    base: buttonStyles.base,
+  },
+};
 ```
