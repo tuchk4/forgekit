@@ -15,15 +15,19 @@ Usually all such features are developed and stored inside component and this is 
 ### Component lifecycle in the images
 
 * Component is simple and it's code is beautiful, simple and readable
+
 <img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component.png">
 
 * Developing new component's features
+
 <img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-with-features.png">
 
 * Component became complex and it's code is much harder and uglier than was before
+
 <img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-with-added-features.png">
 
 * DEATH
+
 <img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-became-complex.png">
 
 ### Develop features separately
