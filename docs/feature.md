@@ -92,3 +92,29 @@ Feature = {
 Feature.propTypes = {}
 Feature.defaultProps = {}
 ```
+
+Example:
+
+```js
+class HOC extends React.Component {
+  comopnenDidMount() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return this.props.children;
+  }
+}
+
+const Feature = {
+  hoc: Component => {
+    return props => {
+      return (
+        <Hoc>
+          <Component {...props} />
+        </Hoc>
+      );
+    }
+  }
+}
+```

@@ -63,3 +63,5 @@ export default compose(
 
 
 ## What should I use?
+
+## Difference in lifecycle methods? ref?
