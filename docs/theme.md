@@ -1,6 +1,31 @@
+## Theme
+
+Allows to define theme structure for feature or component. Then it used for *classNames* or *style* calculating.
+Support custom themes provided by global CSS or inline styles and other libraries:
+
+* [CSS Modules](https://github.com/css-modules/css-modules)
+* [Aphrodite](https://github.com/Khan/aphrodite)
+* [Radium](http://formidable.com/open-source/radium/)
+* [React Style](https://github.com/js-next/react-style)
+* [JSS](https://github.com/cssinjs/jss)
+
+**What is theme?**
+
+Simple styling manager for the React components.
+
+Theme structure is defined at *propTypes* and with default values defined at *defaultProps*.
+So *theme* is the component prop.
+
+```theme
+<Component theme={theme} />
+```
+
+**Why theme is important for feature?**
+
+A lot of features usually provides some new UI elements for component. So - they should/may be customized.
+
 ## Forgekit theme api
 
-Allows to define feature or component theme structure and then process it into component's *classNames* or *style*.
 Theme structure should be defined at the *propTypes*.
 Default theme values should be defined at *defaultProps*.
 
@@ -12,13 +37,14 @@ import { ThemeProp } from 'forgekit';
 
 Feature1.propTypes = {
   theme: ThemeProp({
-    feature1: PropTypes.string
+    foo: PropTypes.string,
+    bar: PropTypes.string
   })
 };
 
 Feature2.propTypes = {
   theme: ThemeProp({
-    feature2: PropTypes.string
+    baz: PropTypes.string
   })
 };
 
@@ -33,6 +59,10 @@ expect(ForgedComponent.propTypes.theme).toEqual({
 **What is the ThemeProp?**
 
 It is same as *PropTypes.shape* but there is the static attribute that contains all defined attributes. Forgekit needs it for theme merging.
+*PropTypes.shape* cannot be used because it is a bound function and there are no access to defined shape attributes.
+
+I have created  [feature request at React repository](https://github.com/facebook/react/issues/8310) to fill name attribute for all *propTypes*.
+If it is approved - *ThemeProp* could be removed.
 
 ```js
 const ThemeProp = theme => {

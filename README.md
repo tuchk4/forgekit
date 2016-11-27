@@ -2,6 +2,8 @@
 
 ![Forgekit travis build](https://api.travis-ci.org/tuchk4/forgekit.svg?branch=master)
 
+**This project is still experimental, so feedback from component authors would be greatly appreciated!**
+
 ## Motivation
 
 [recompose](https://github.com/acdlite/recompose) had a great influence. It is great library that provide excellent way to lift state into functional wrappers, perform the most common React patterns, optimize rendering performance. Also it is possible to store common functions separately and share them between components. And as the result - component's source code become much more easier.
@@ -397,6 +399,12 @@ export default forge(icon, customFlags)(Button);
 ### ...sharing features in open source
 
 If there is any open source component's library that was built with Forgekit - it is simple to contribute because developers does not need to understand its whole structure and work with all library. Just develop feature function with tests and push it. Or even push to own repository.
+
+## Install
+
+```bash
+npm install --save forgekit
+```
 
 ## Forgekit components library
 

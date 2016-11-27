@@ -1,9 +1,26 @@
 # Forgekit vs Recompose
 
-All forgekit features (which are without lifecycle methods) could be implemented with *recompose/mapProps*.
-Pure features are
+As the developer of the Forgekit I am really not happy to develop one more library (one more npm package).
+At least because most forgekit features could be implemented with:
+
+* [recompose/mapProps](https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops)
+* [recompose/withProps](https://github.com/acdlite/recompose/blob/master/docs/API.md#withprops)
+* [recompose/setDisplayName](https://github.com/acdlite/recompose/blob/master/docs/API.md#setdisplayname)
+* [recompose/lifecycle](https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle)
+
+*But* there some critical differences:
+
+* Forgekit merge propTypes and defaultProps
+* Forgekit provide tools for component theming
+* From my point of view - Forgekit provides more readable *displayName*
+*
+
+
+* Forgekit:
 
 ```js
+import forgekit from 'forgekit';
+
 const AlertIcon = ({
   alert,
   icon,
@@ -12,11 +29,16 @@ const AlertIcon = ({
   ...props,  
   alert,
   icon: !icon && alert ? 'alert' : ''
-})
+});
+
+const ForgedComponent = forge(AlertIcon)(Component);
 ```
+
+* Recompose mapProps:
 
 ```js
 import mapProps from 'recompose/mapProps';
+import compose from 'recompose/compose'
 
 const AlertIcon = mapProps({
   alert,
@@ -26,7 +48,9 @@ const AlertIcon = mapProps({
   ...props,  
   alert,
   icon: !icon && alert ? 'alert' : ''
-})
+});
+
+const EnchantedComponent = compose(AlertIcon)(Component);
 ```
 
 The differences:
@@ -44,16 +68,16 @@ Recompose does not manipulate with propTypes and defaultProps.
 
 * Rendering perfomance: recompose a bit faster  (But I dont understand why). Rendering 50k components with recompose: 2.1sec, with Forgekit: 2.8sec.
 
-## Forgekit and Recompose
-
-Two libraries could work together
+## Forgekit and Recompose can work together
 
 ```js
-const ForgedComponent = (f1, f2, f3)(Button, 'IconButton', {
-  theme: {},
-  icon: 'alert',
-  iconPosition: 'left'
-});
+import compose from 'recompose/compose';
+import pure from 'recompose/pure';
+import withContext from 'recompose/withContext';
+
+import forgekit from 'forgekit';
+
+const ForgedComponent = (...features)(Component);
 
 export default compose(
   pure(),
@@ -61,7 +85,5 @@ export default compose(
 )(ForgedComponent);
 ```
 
-
-## What should I use?
-
+## Trouble shooting
 ## Difference in lifecycle methods? ref?

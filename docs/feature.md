@@ -26,7 +26,7 @@ Usually all such features are developed and stored inside component and this is 
 
 <img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-with-added-features.png">
 
-* DEATH
+* DEATH - bugs, legacy code, spaghetti :(
 
 <img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-became-complex.png">
 
@@ -34,13 +34,14 @@ Usually all such features are developed and stored inside component and this is 
 
 Forgekit suggest to develop and store features separately from component. There are a lof of advantages:
 
-* Responsibility. Each feature stored separated file (or module if speak in CommonJS context) and there is code that implements only specific functionality and provide props only for specific feature.
+* Responsibility. Each feature stored separated file (or module if speak in CommonJS context) and there is code that implements only specific functionality and provide props that are needed only for its functionality.
 * Sharable. Features could be shared between components or applications.
 * Tests. Easy to write tests because Feature is a pure function.
 * Refactoring. It is more simpler to remove feature's import than find and remove large number of related lines of code
 * Refactoring. Old feature could be swapped with new features.
 * Optimization. Use only needed features.
 * Feature customization. Each feature could customized separately. This is much better that customize whole component.
+
 
 ### High-level and Low-level props
 
@@ -69,6 +70,7 @@ Forgekit feature is a pure functions that:
 
 * provide *propTypes* and *defaultProps*
 * takes props as argument and returns new props
+* provide its own theme structure ([more about themes](./theme.md))
 
 ```js
 Feature = function(props): newProps
