@@ -17,7 +17,7 @@ forge(...features)(Component, displayName, bindProps)
 
 * **features** *Array[Function]* - Used features
 * (required) **Component** *React.Component* - Original component
-* **displayName** *String* - New component display name. Works correctly with [Chrome developers tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+* **displayName** *String* - New component display name. Works correctly with [React chrome developers tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
 * **bindProps** *Object | Function* - Props that are merged with the owner props.
 
 **It also can be read as**

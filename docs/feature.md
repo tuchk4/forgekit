@@ -1,9 +1,16 @@
-## Little theory. What is component feature?
+# Little theory. What is component feature?
 
-> It is an intentional distinguishing characteristic of a component.
+- [The problem](#the-problem)
+- [Component life in the images](#component-life-in-the-images)
+- [Solution: develop features separately](#solution-develop-features-separately)
+- [High-level and low-level props](#high-level-and-low-level-props)
+- [Forgekit feature function](#forgekit-feature-function)
+- [Forgekit feature with lifecycle methods](#forgekit-feature-with-lifecycle-methods)
+
+> Wiki: It is an intentional distinguishing characteristic of a component.
 
 Component feature - is the new component functionality. And in most cases it depends and provide new props.
-For example *HighliteFlags* feature for *<Button/>* component - add *success*, *alert* and *warning* bool props and depending on them provide specific styles.
+For example *HighliteFlags* feature for `<Button/>` component - add *success*, *alert* and *warning* bool props and depending on them provide specific styles.
 
 ### The problem
 
@@ -15,7 +22,7 @@ Usually all such features are developed and stored inside component and this is 
 * A lot of *copy-paste* code. Especially a lot of duplication across components *propTypes*.
 * Hard to share code. Only whole component could be shared with all implemented features. But sometimes needs to share only specific feature between components or even between applications.
 
-#### Component life in the images
+### Component life in the images
 
 * Component is simple and it code is beautiful, simple and readable.
 

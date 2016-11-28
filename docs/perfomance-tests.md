@@ -1,6 +1,8 @@
-### Default approach
+## Default approach
 
-* *constructor* -> *componentDidMount* time ~ 3.222sec
+Tested console.time between *constructor* and *componentDidMount* + [React perf addon](https://facebook.github.io/react/docs/perf.html)
+
+* console.time *constructor* -> *componentDidMount* time ~ 3.222sec
 
 | (index)  | Owner > Component     | Inclusive render time (ms) | Instance count | Render count |
 |----------|-----------------------|----------------------------|----------------|--------------|
@@ -10,7 +12,7 @@
 
 ## Higher order components
 
-* *constructor* -> *componentDidMount* time ~ 5.23sec
+* console.time between *constructor* -> *componentDidMount* time ~ 5.33sec
 
 | (index)  | Owner > Component     | Inclusive render time (ms) | Instance count | Render count |
 |----------|-----------------------|----------------------------|----------------|--------------|
@@ -23,7 +25,7 @@
 
 ## Forged components
 
-* *constructor* -> *componentDidMount* time ~ 5.02src
+* console.time between *constructor* -> *componentDidMount* time ~ 5.08sec
 
 | (index)  | Owner > Component           | Inclusive render time (ms) | Instance count | Render count |
 |----------|-----------------------------|----------------------------|----------------|--------------|
@@ -34,7 +36,10 @@
 
 ## Recompose components
 
-* *constructor* -> *componentDidMount* time ~ 5.02src
+* console.time between *constructor* -> *componentDidMount* time ~ 4.78sec
 
-| (index)  | Owner > Component           | Inclusive render time (ms) | Instance count | Render count |
-|----------|-----------------------------|----------------------------|----------------|--------------|
+| (index)  | Owner > Component                                                | Inclusive render time (ms) | Instance count | Render count |
+|----------|------------------------------------------------------------------|----------------------------|----------------|--------------|
+| 0        | "App"                                                            | 620.29                     |1               | 1            |
+| 1        | "App > Perfomance"                                               | 620.14                     |1               | 1            |  
+| 2        | "Perfomance > defaultProps(mapProps(mapProps(EnchantedButotn)))"	| 476.35                     |20000	          | 20000        |

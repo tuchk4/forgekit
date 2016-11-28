@@ -2,12 +2,6 @@
 
 ![Forgekit travis build](https://api.travis-ci.org/tuchk4/forgekit.svg?branch=master)
 
-> Share featres betweeen comopnent libraries not depenidng on comp librarues
-
-> Featurism
-
-> Declarative style
-
 **This project is still experimental, so feedback from component authors would be greatly appreciated!**
 
 ## Motivation
@@ -16,30 +10,21 @@
 
 > recompose - React utility belt for function components and higher-order components. Think of it like lodash for React.
 
-## Forgekit
+# Forgekit
 
-Provide easier way to develop component's features and inject them into the components.
+Provide easier way to develop and manage component's features and inject them into the components.
 
-### Little theory. What is component feature?
+## Docs
 
-It is an intentional distinguishing characteristic of a component. In most cases each component feature provide new specific *propTypes*.
+* [Forgekit api]('./docs/api.md')
+* [Little theory. What is component feature?]('./docs/feature.md')
+* [Forgekit theme managementing]('./docs/theme.md')
+* [Forgekit and Recompose]('./docs/forgekit-and-recompose.md')
 
-And there **Low-level** prop types and **high-level** prop types.
-From React documentation - [DOM Elements](https://facebook.github.io/react/docs/dom-elements.html):
 
-> React implements a browser-independent DOM system for performance and cross-browser compatibility. We took the opportunity to clean up a few rough edges in browser DOM implementations.
-In React, all DOM properties and attributes (including event handlers) should be camelCased. For example, the HTML attribute tabindex corresponds to the attribute tabIndex in React. The exception is aria-* and data-* attributes, which should be lowercased.
+## Feature function signature as props middleware:
 
-So all DOM attributes and *children* prop are **low-level** component props.
-**High-level props** - are custom props.
-
-And in all cases **high-level** props always affects on **low-level** props. That why it is better to map component props before *render* instead of creating higher order components.
-
-It is looks like props middlewares (or like props micro services :tada:). This way does not generate higher order components so it will not affect on performance.
-
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/props-as-middleware.png">
-
-Feature function signature:
+Detailed information at [feature api documentation]('./docs/feature.md')
 
 ```js
 Feature = function(props): newProps
@@ -47,7 +32,23 @@ Feature.propTypes = {}
 Feature.defaultProps = {}
 ```
 
-Inject features into the component:
+## Feature function signature as higher order component:
+
+Detailed information at [feature api documentation]('./docs/feature.md'). This useful when need to work with lifecycle methods.
+
+```js
+Feature = {
+  props: function(props): newProps,
+  hoc: function(Component: React.Component): function(props): React.Component
+}
+
+Feature.propTypes = {}
+Feature.defaultProps = {}
+```
+
+## Forgekit api
+
+Detailed information at [forgekit api documentation]('./docs/api.md')
 
 ```js
 import forgekit from 'forgekit';
@@ -74,152 +75,18 @@ ForgedButton.defaultProps = {
 
 So if you use [React Sotrybook](https://github.com/storybooks/react-storybook) with [storybook-addon-ifno](https://github.com/storybooks/react-storybook-addon-info) - it will show components props and default props correctly.
 
-## Forgekit api
+## Feature examples
 
-```js
-forge(...features)(Component, displayName, withProps)
-```
+For example there is a `<Button/>` component with custom (high-level) props:
 
-* *features* - Injected features
-* *Component* - Original component
-* *displayName* - New component's display name. Works correctly with [Chrome developers tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-* *withProps* - Defined props that are merged with component's props before features execution. Could be used as object and as function.
-
-If object:
-
-```js
-const features = forge(...features)
-export default features(Component, 'Button');
-export const RippleButton = features(Component, 'RippleButton', {
-  ripple: true
-});
-```
-
-Function definition is useful when need to define props that depends on another props.
-
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/props-as-middleware-with-props.png">
-
-```js
-export default forge(...features)(Component, 'Button', ({
-  alert,
-  ...props
-}) => {
-
-  return {
-    ...props,
-    // Add "error" icon if "alert" prop exists
-    icon: alert ? 'error' : ''
-  }
-});
-```
-
-
-It is easier and much more readable than create higher order components for such features or add such simple logic inside component.
-
-## Forgekit theme api
-
-Supporting css modules.
-```js
-import { ThemeProp } from 'forgekit';
-import styles from './style.css';
-
-const AwesomeComponent = ({theme, children}) => {
-  const classList = classnames(theme.base, theme.style);
-  return <div className={classList}>{children}<div/>
-};
-
-AwesomeComponent.propTypes = {
-  theme: ThemeProp({
-    base: PropTypes.string,
-    style: PropTypes.string,
-  }),
-};
-
-AwesomeComponent.defaultProps = {
-  theme: {
-    base: styles.base,
-    style: styles.style,
-  },
-};
-
-```
-
-```js
-import { ThemeProp } from 'forgekit';
-import styles from './style.css';
-
-const whiteFrame = ({className, z, theme, ...props}) => {
-  return {
-    ...props,
-    className: classnames(className, {
-      [theme.whiteframe]: z
-      [`${styles.whiteframe}-${z}dp`]: z
-    })
-  }
-}
-
-whiteFrame.propTypes = {
-  z: PropTypes.number,
-  theme: ThemeProp({
-    whiteframe: PropTypes.string,
-  })
-}
-
-whiteFrame.defaultProps = {
-  z: 0,
-  theme: {
-    whiteframe: styles.whiteframe
-  }
-}
-```
-
-All theme keys will be merged in ForgedComponent
-
-```js
-const ForgedComponent = forgekit(whiteFrame)(AwesomeComponent);
-expect(ForgedComponent.propTypes).toEqual({
-  theme: {
-    whiteframe: PropTypes.string,,
-    base: PropTypes.string,
-    style: PropTypes.string
-  }
-})
-```
-
-Customize theme properties:
-```js
-import customStyles from './custom-styles.css';
-
-const ForgedComponent = forgekit(whiteFrame)(AwesomeComponent, 'ForgedComponent', {
-  theme: {
-    whiteframe: customStyles.whiteFrame
-  }
-});
-```
-
-or event dynamic customization
-```js
-import customStyles from './custom-styles.css';
-
-const ForgedComponent = forgekit(whiteFrame)(AwesomeComponent, 'ForgedComponent', (props) => {
-  return {
-    theme: {
-      whiteframe: props.alert ? customStyles.alertWhiteFrame : customStyles.whiteFrame
-    }
-  }
-});
-```
-
-### Feature examples
-
-For example there is a *<Button/>* component with new high-level props:
+> More details about custom (high-level) and native (low-level) props at [feature documentation]('./docs/feature.md'#high-level-and-low-level-props)
 
 * *alert: PropTypes.bool* - If true, component will have an alert styles
 * *icon: PropTypes.bool* - Value of the icon (See Font Icon Component).
 * *iconPosition: PropTypes.oneOf(['left', 'right'])* - Show icon form the left of right from label
 * *flat* - If true, the button will have a flat look.
 
-Let's define relations between high-level and low-level props
+Let's find relations between custom (high-level) and native (low-level) props
 
 * *alert* - affects *style* or *className*. The same behaviour is for *flat* property.
 
@@ -247,7 +114,7 @@ alertFeature.propTypes = {
 }
 ```
 
-* *icon* - also affects *children*. Depending on *iconPosition* add *<Icon/>* to the *children*.
+* *icon* - affects *children*  prop. Depending on *iconPosition* add `<Icon/>` to the *children*.
 
 ```js
 const iconFeature = ({
@@ -285,13 +152,9 @@ This is possible with forgekit. Just define Feature as object:
 
 ```js
 class ClickOutside extends React.Component {
-  componentDidMount() {
-    // ...
-  }
+  componentDidMount() {}
 
-  componentWillUnmount() {
-    // ...
-  }
+  componentWillUnmount() {}
 
   render() {
     return this.props.children;
@@ -318,11 +181,11 @@ const Feature = {
 
 ### ...share common features between components
 
-There are features that does not relate to certain component. They could be injected into any component.
+There are features that does not relate to certain component. They could be added into any component.
 
-* *clickOutside* - Fires after click outside of the component
-* *highlite flags* - Depends on flag (primary / alert / danger / warning) add styles to the component
-* *loader overlay* - If *loading* prop is true - show loader overlay above the component
+* *clickOutside* - Fires when click outside of the component
+* *highliteFlags* - Depends on prop *primary* / *alert* / *danger* / *warning* - add styles to the component
+* *loaderOverlay* - If *loading* prop is true - show loader overlay above the component
 
 ```js
 import forgekit from 'forgekit';
@@ -331,22 +194,23 @@ import Button from 'components/button';
 import Layout from 'components/layout';
 
 import clickOutside from 'features/click-outside';
-import loaderOverlay from 'features/loader-overlay';
 import highliteFlags from 'features/highlite-flags';
+import loaderOverlay from 'features/loader-overlay';
+
 
 export const AppButton = forgekit(clickOutside, highliteFlags)(Button);
 export const AppLayout = forgekit(clickOutside, loaderOverlay)(Layout);
 ```
 
 There is one common feature - *clickOutside*.
-Forged components *<AppButton/>* and *<AppLayout/>* accepts *onClickOutside()* prop.
-But *onClickOutside()* does not duplicated *propTypes* at the *<Button/>* and *<Layout/>*. It is injected by *clickOutside* feature.
 
-* Feature could be used for few components. So no code duplication.
+Forged components *<AppButton/>* and *<AppLayout/>* accepts *onClickOutside* prop. But *onClickOutsided* is not duplicated at  `<Button/>` and `<Layout/>` *propTypes*. It is automatically added with *clickOutside* feature.
+
+* Feature could be shared between components and applications. So there is no code duplication.
 
 ### ...use only needed features
 
-Is look at any open source components library - each component has a lot of features so there are a lot of *PropTypes*. For example component *<Button/>* has features:
+Look at any open source components library - each component has a lot of features and there are a lot of *propTypes*. For example component `<Button/>` has features:
 
 * *ripple* - If true, component will have a ripple effect on click.
 * *icon* - Value of the icon (See Font Icon Component).
@@ -355,7 +219,9 @@ Is look at any open source components library - each component has a lot of feat
 * *onMouseLeave* - 	Fires after the mouse leaves the Component.
 * *inverse* - If true, the neutral colors are inverted. Useful to put a button over a dark background.
 
-A lot of more. And it is not possible to use only *icon* feature. All features will be included to application build.
+A lot of more. And it is not possible to use only *icon* feature. All features implementations will be included to application build.
+
+Forgekit allows to import only used features.
 
 ```js
 import forgekit from 'forgekit';
@@ -372,8 +238,8 @@ export default forgekit(icon, ripple)(Button);
 
 ### ...easier to refactor and support clean code
 
-All needed features could be imported from separated modules. This is very helpful when you want to share your component's features with another team in your company or just push them to Github.
-Also this provide good way to keep your code cleaner: just create new module and develop new functionality instead of patching existing modules (module - i mean commonJS module). And same with refactoring - just remove imports if need to clean some old or unused features. This is much easier than remove lines that relays to certain feature from all component's source (and there are great chance that other feature will become broken).
+All needed features could be imported from separated modules. This is very helpful when you want to share your component features with another team, another application or just push them to Github and make them open source.
+Also this provide good way to keep your code cleaner: just create new module and develop new functionality instead of patching existing modules. And same with refactoring - just remove imports if need to clean some old or unused features. This is much easier than remove large number of lines from components code and then make sure that all other features work correctly.
 
 * Easy to remove features — just remove feature import. Instead of removing number of lines from the component.
 * Easy to write and understand code — feature is a simple function
@@ -391,7 +257,7 @@ import highliteFlags from 'features/highlite-flags';
 
 const Button = (children, ...props) => <button {...props}>{children}</button>;
 
-const customFlags = highliteFlags({
+const customHighliting = highliteFlags({
   alert: {
     color: 'white',
     fontWeight: 'bold'
@@ -399,12 +265,17 @@ const customFlags = highliteFlags({
   }
 });
 
-export default forge(icon, customFlags)(Button);
+export default forge(icon, customHighliting)(Button);
 ```
 
 ### ...sharing features in open source
 
 If there is any open source component's library that was built with Forgekit - it is simple to contribute because developers does not need to understand its whole structure and work with all library. Just develop feature function with tests and push it. Or even push to own repository.
+
+### ...change component configuration
+
+Example: change `<Dropdown/>` [configuration to declarative style](https://gist.github.com/tuchk4/a04f4d151e0654edb01f47cf0d11f7b3) instead of passing all via props.
+It is very easy to add or remove this feature. Do not need to change components code.
 
 ## Install
 
@@ -412,24 +283,33 @@ If there is any open source component's library that was built with Forgekit - i
 npm install --save forgekit
 ```
 
+## Suggested dev. env for component development
+
+* Use [Forgekit](https://github.com/tuchk4/forgekit) or [Recompose](https://github.com/acdlite/recompose). Especially for base components.
+* User [React storybook](https://getstorybook.io/) for documentation.
+* Write *README.md* for each component
+* Use Storybook [knobs addon](https://github.com/storybooks/storybook-addon-knobs)
+* Use Storybook [info addon](https://github.com/storybooks/react-storybook-addon-info). Because Forgekit merge features *propTypes* it work correctly with this addon.
+* Use Storybook [readme addon](https://github.com/tuchk4/storybook-readme)
+* Dont forget about [Creeping featurism](https://en.wikipedia.org/wiki/Feature_creep) anti-pattern that can ruin your components. With Forgekit it is much more easier to manage comopnents features.
+
 ## Forgekit components library
 
 I will contribute to Forgekit components library:
 
 * Develop all base components and features for them
 * Add styles according to Google Material design
-* Thanks Frogekit theme feature - components could be stylized to an other design
+* Components should be easily stylized to any other design without extra styles at application build
 
-## Nearest feature plans
+## Nearest plans
 
-Create Forgekit react storybook plugin:
+Create Forgekit [react storybook](https://github.com/storybooks/react-storybook) plugin. Main goal - manage [features]('./docs/feature.md') and [themes]('./docs/theme.md').
 
 * Show used features
 * Show available features
 * Show component and features documentation
+* Components Theme customizations
 
-
-## Feedback wanted
 
 ## Feedback wanted
 

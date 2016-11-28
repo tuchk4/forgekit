@@ -1,4 +1,9 @@
-## Theme
+# Theme
+
+- [Forgekit theme api](#forgekit-theme-api)
+  - [What is the ThemeProp?](#what-is-the-themeprop)
+- [Theme className example](#theme-classname-example)
+- [Theme styles example](#theme-styles-example)
 
 Allows to define theme structure for feature or component. It is used for *classNames* or *style* calculating.
 Support custom themes provided by global CSS or inline styles and other libraries:
