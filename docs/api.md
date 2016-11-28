@@ -7,7 +7,7 @@ But each feature also can implement a higher order component (usually for lifecy
 
 More details about features in <a href="./feature.md">features api documentation</a>.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/props-as-middleware.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/props-as-middleware.png">
 
 ```js
 import forgekit from 'forgekit';
@@ -48,7 +48,7 @@ export const RippleButton = features(Component, 'RippleButton', {
 
 *bindProps* as *function* is useful when need to define props that depends on another props.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/props-as-middleware-with-props.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/props-as-middleware-with-props.png">
 
 ```js
 export default forge(...features)(Component, 'AwesomeComponent', ({

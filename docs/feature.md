@@ -26,19 +26,19 @@ Usually all such features are developed and stored inside component and this is 
 
 * Component is simple and it code is beautiful, simple and readable.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/component.png">
 
 * Developing new component features. Developing at this stage is like breathe the crystal clear air. Component is still virgin.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-with-features.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/component-with-features.png">
 
 * Component became complex and it code is much harder and uglier than was before.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-with-added-features.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/component-with-added-features.png">
 
 * DEATH - bugs, legacy code, spaghetti :( Components look like virus or infection.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/component-became-complex.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/component-became-complex.png">
 
 ### Solution: develop features separately
 
@@ -74,7 +74,7 @@ That is why most features could be implemented by mapping props before *render*.
 It is looks like props middlewares (or like props micro services).
 It does not generate higher order components so it will not affect on performance.
 
-<img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/docs/images/props-as-middleware.png">
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/props-as-middleware.png">
 
 ### Forgekit feature function
 

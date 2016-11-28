@@ -1,4 +1,4 @@
-# <a href="https://github.com/tuchk4/forgekit"><img src="https://raw.githubusercontent.com/tuchk4/forgekit/release/2.0/logo/forgekit-logo-small.png"></a>
+# <a href="https://github.com/tuchk4/forgekit"><img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/logo/forgekit-logo-small.png"></a>
 
 ![Forgekit travis build](https://api.travis-ci.org/tuchk4/forgekit.svg?branch=master)
 
@@ -50,11 +50,15 @@ Feature.defaultProps = {}
 
 Detailed information at [forgekit api documentation]('./docs/api.md')
 
+In general it looks like props middleware.
+But each feature also can implement a higher order component (usually for lifecycle methods).
+
+<img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/docs/images/props-as-middleware.png">
+
 ```js
 import forgekit from 'forgekit';
 
-const Button = (children, ...props) => <button {...props}>{children}</button>;
-const ForgedButton = forgekit(Feature1, Feature2)(Button);
+forge(...features)(Component, displayName, bindProps)
 ```
 
 ForgedButton *propTypes* and *defaultProps* are merged from all features and origin component.
