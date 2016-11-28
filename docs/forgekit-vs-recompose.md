@@ -1,6 +1,6 @@
-# Forgekit vs Recompose
+## Forgekit vs Recompose
 
-As the developer of the Forgekit I am really not happy to develop one more library (one more npm package).
+As the developer of the Forgekit I am not happy to develop one more library (one more npm package).
 At least because most forgekit features could be implemented with:
 
 * [recompose/mapProps](https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops)
@@ -8,13 +8,13 @@ At least because most forgekit features could be implemented with:
 * [recompose/setDisplayName](https://github.com/acdlite/recompose/blob/master/docs/API.md#setdisplayname)
 * [recompose/lifecycle](https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle)
 
-*But* there some critical differences:
+But there some critical differences:
 
 * Forgekit merge propTypes and defaultProps
-* Forgekit provide tools for component theming
+* Forgekit provide tools for component and feature theming
 * From my point of view - Forgekit provides more readable *displayName*
-*
 
+### Example of same feature with Forgekit and Recompose
 
 * Forgekit:
 
@@ -34,7 +34,7 @@ const AlertIcon = ({
 const ForgedComponent = forge(AlertIcon)(Component);
 ```
 
-* Recompose mapProps:
+* Recompose:
 
 ```js
 import mapProps from 'recompose/mapProps';
@@ -57,9 +57,9 @@ The differences:
 
 > NOTE: I am not sure about some statements about recompose
 
-* If manipulate only with existing component's props - there are no differences expect that mapProps returns higher order component. Forgekit feature provide function that is just executed before component's render.
+* If manipulate only with existing component props - there are no differences expect that mapProps returns higher order component. Forgekit feature provide function that is just executed before component render.
 
-* If see such functions as new component's feature - Forgekit merge all propTypes and defaultProps from all features and origin component.
+* If see such functions as new component feature - Forgekit merge all propTypes and defaultProps from all features and origin component.
 Recompose does not manipulate with propTypes and defaultProps.
 
 * From my point of view - Forgekit provides more readable displayName.

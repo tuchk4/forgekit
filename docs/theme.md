@@ -1,6 +1,6 @@
 ## Theme
 
-Allows to define theme structure for feature or component. Then it used for *classNames* or *style* calculating.
+Allows to define theme structure for feature or component. It is used for *classNames* or *style* calculating.
 Support custom themes provided by global CSS or inline styles and other libraries:
 
 * [CSS Modules](https://github.com/css-modules/css-modules)
@@ -13,23 +13,24 @@ Support custom themes provided by global CSS or inline styles and other librarie
 
 Simple styling manager for the React components.
 
-Theme structure is defined at *propTypes* and with default values defined at *defaultProps*.
+Theme structure is defined at *propTypes* and default values defined at *defaultProps*.
 So *theme* is the component prop.
 
-```theme
+```js
 <Component theme={theme} />
 ```
 
-**Why theme is important for feature?**
+**Why theme is important for features?**
 
-A lot of features usually provides some new UI elements for component. So - they should/may be customized.
+A lot of features usually provides new UI elements for component. So - they should/may be customized.
 
 ## Forgekit theme api
 
 Theme structure should be defined at the *propTypes*.
+
 Default theme values should be defined at *defaultProps*.
 
-All defined themes will be merged in the ForgedComponent.
+All defined themes are merged in the ForgedComponent.
 Each feature or component will receive only defined theme structure.
 
 ```js
@@ -56,13 +57,11 @@ expect(ForgedComponent.propTypes.theme).toEqual({
 });
 ```
 
-**What is the ThemeProp?**
+### What is the ThemeProp?
 
-It is same as *PropTypes.shape* but there is the static attribute that contains all defined attributes. Forgekit needs it for theme merging.
-*PropTypes.shape* cannot be used because it is a bound function and there are no access to defined shape attributes.
+*ThemeProp* is same as *PropTypes.shape* but with attribute that contains all defined keys. Forgekit needs it for theme merging.
 
-I have created  [feature request at React repository](https://github.com/facebook/react/issues/8310) to fill name attribute for all *propTypes*.
-If it is approved - *ThemeProp* could be removed.
+*PropTypes.shape* cannot be used directly because it is a bound function and there are no access to defined shape attributes.
 
 ```js
 const ThemeProp = theme => {
@@ -73,11 +72,14 @@ const ThemeProp = theme => {
 }
 ```
 
-## className Example
+I have created  [React feature request](https://github.com/facebook/react/issues/8310) to fill name attribute for all *propTypes*.
+If it is approved - *ThemeProp* will be removed.
+
+## Theme className example
 
 For better experience suggest to use [classnames](https://www.npmjs.com/package/classnames) library.
 
-* Define component's theme structure
+* Define component theme structure
 
 ```js
 import { ThemeProp } from 'forgekit';
@@ -106,7 +108,7 @@ Button.defaultProps = {
 };
 ```
 
-* Define feature's theme structure
+* Define feature theme structure
 
 ```js
 import styles from './alert.css';
@@ -147,7 +149,7 @@ const MaterialButton = fogrkit(Alert)(Button, 'MaterialButton', {
 });
 ```
 
-* Forge and use theme prop
+* Or Forge and use theme prop
 
 ```js
 import materialButtonStyles from './material-button.css';
@@ -163,7 +165,7 @@ const theme = {
 ```
 
 
-## styles Example
+## Theme styles example
 
 It is same as example with classNames expect:
 

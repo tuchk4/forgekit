@@ -2,6 +2,12 @@
 
 ![Forgekit travis build](https://api.travis-ci.org/tuchk4/forgekit.svg?branch=master)
 
+> Share featres betweeen comopnent libraries not depenidng on comp librarues
+
+> Featurism
+
+> Declarative style
+
 **This project is still experimental, so feedback from component authors would be greatly appreciated!**
 
 ## Motivation
@@ -425,6 +431,8 @@ Create Forgekit react storybook plugin:
 
 ## Feedback wanted
 
-Forgekit is still in the early stages and even still be an experimental project. Your are welcome to submit issue or PR if you have suggestions! Or write me on [Twitter](https://twitter.com/tuchk4) (Valerii Sorokobatko).
+## Feedback wanted
+
+Forgekit is still in the early stages and even still be an experimental project. Your are welcome to submit issue or PR if you have suggestions! Or write me on twitter [@tuchk4](https://twitter.com/tuchk4).
 
 :tada:
