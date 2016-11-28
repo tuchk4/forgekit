@@ -13,20 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tuchk4/react-feature-kit.git"
+    "url": "git+https://github.com/tuchk4/forgekit.git"
   },
   "keywords": [
     "react",
     "components",
     "ui",
-    "featuring"
+    "featuring",
+    "forgekit"
   ],
-  "author": "",
+  "author": "Valerii Sorokobatko <valeriy.sorokobatko@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tuchk4/react-feature-kit/issues"
+    "url": "https://github.com/tuchk4/forgekit/issues"
   },
-  "homepage": "https://github.com/tuchk4/react-feature-kit#readme",
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",

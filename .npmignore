@@ -1,2 +1,10 @@
 /lib
 /__tests__
+/docs
+/logo
+/coverage
+/node_modules
+.babelrc
+.travis.yml
+.gitignore
+.eslintrc

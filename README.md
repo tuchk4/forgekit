@@ -16,15 +16,14 @@ Provide easier way to develop and manage component's features and inject them in
 
 ## Docs
 
-* [Forgekit api](./docs/api.md)
-* [Little theory. What is component feature?](./docs/feature.md)
-* [Forgekit theme managementing](./docs/theme.md)
-* [Forgekit and Recompose](./docs/forgekit-and-recompose.md)
-
+* <a href="https://github.com/tuchk4/forgekit/blob/master/docs/api.md">Forgekit api</a>
+* <a href="https://github.com/tuchk4/forgekit/blob/master/docs/feature.md">Little theory. What is component feature?</a>
+* <a href="https://github.com/tuchk4/forgekit/blob/master/docs/theme.md">Forgekit theme managementing</a>
+* <a href="https://github.com/tuchk4/forgekit/blob/master/docs/forgekit-and-recompose.md">Forgekit and Recompose</a>
 
 ## Feature function signature as props middleware:
 
-Detailed information at [feature api documentation](./docs/feature.md)
+Detailed information at <a href="https://github.com/tuchk4/forgekit/blob/master/docs/feature.md">feature api documentation</a>
 
 ```js
 Feature = function(props): newProps
@@ -34,7 +33,7 @@ Feature.defaultProps = {}
 
 ## Feature function signature as higher order component:
 
-Detailed information at [feature api documentation](./docs/feature.md). This useful when need to work with lifecycle methods.
+Detailed information at <a href="https://github.com/tuchk4/forgekit/blob/master/docs/feature.md">feature api documentation</a>. This useful when need to work with lifecycle methods.
 
 ```js
 Feature = {
@@ -48,7 +47,7 @@ Feature.defaultProps = {}
 
 ## Forgekit api
 
-Detailed information at [forgekit api documentation](./docs/api.md)
+Detailed information at <a href="https://github.com/tuchk4/forgekit/blob/master/docs/api.md">forgekit api documentation</a>
 
 In general it looks like props middleware.
 But each feature also can implement a higher order component (usually for lifecycle methods).
@@ -84,7 +83,7 @@ So if you use [React Sotrybook](https://github.com/storybooks/react-storybook) w
 
 For example there is a `<Button/>` component with custom (high-level) props:
 
-> More details about custom (high-level) and native (low-level) props at [feature documentation](./docs/feature.md'#high-level-and-low-level-props)
+> More details about custom (high-level) and native (low-level) props at <a href="https://github.com/tuchk4/forgekit/blob/master/docs/feature.md#high-level-and-low-level-props">feature documentation</a>
 
 * *alert: PropTypes.bool* - If true, component will have an alert styles
 * *icon: PropTypes.bool* - Value of the icon (See Font Icon Component).
@@ -308,7 +307,7 @@ I will contribute to [Forgekit components library](https://github.com/tuchk4/for
 
 ## Nearest plans
 
-Create Forgekit [react storybook](https://github.com/storybooks/react-storybook) plugin. Main goal - manage [features](./docs/feature.md) and [themes](./docs/theme.md).
+Create Forgekit [react storybook](https://github.com/storybooks/react-storybook) plugin. Main goal - manage <a href="https://github.com/tuchk4/forgekit/blob/master/docs/feature.md">features</a> and <a href="https://github.com/tuchk4/forgekit/blob/master/docs/theme.md">themes</a>
 
 * Show used features
 * Show available features
