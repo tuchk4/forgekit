@@ -1,7 +1,7 @@
 # Feature examples
 
-* [Feature documentation]('./feature.md')
-* [Forgekit api documentation]('./api.md')
+* [Feature documentation](./feature.md)
+* [Forgekit api documentation](./api.md)
 
 More examples are at  Forgekit components library. I will contribute it a lot:
 
@@ -74,7 +74,7 @@ RippleFeature.propTypes = {
 
 #### HighliteFlags
 
-More about theme and *ThemeProp* at [theme documentation]('./theme.md');
+More about theme and *ThemeProp* at [theme documentation](./theme.md);
 
 ```js
 import styles from './highlite-flags.css';

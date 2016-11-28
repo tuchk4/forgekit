@@ -37,7 +37,7 @@ There are a lot of advantages:
 * Refactoring. It is more simpler to remove feature import than find and remove large number of related lines of code.
 * Refactoring. Old feature can be swapped with new features. So *propTypes* and *defaultProps* also will be swapped.
 
-More details at [features api documentation]('./feature.md');
+More details at [features api documentation](./feature.md);
 
 #### Forgekit merge propTypes and defaultProps
 
