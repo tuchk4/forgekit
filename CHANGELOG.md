@@ -6,6 +6,7 @@
 * Remove *.postForge()* feature
 * More tests (100% coverage)
 * Readable exceptions. Not more "undefined" Component or feature names in error's texts
+* add docs
 
 Feature signature:
 

@@ -205,7 +205,7 @@ export const AppLayout = forgekit(clickOutside, loaderOverlay)(Layout);
 
 There is one common feature - *clickOutside*.
 
-Forged components *<AppButton/>* and *<AppLayout/>* accepts *onClickOutside* prop. But *onClickOutsided* is not duplicated at  `<Button/>` and `<Layout/>` *propTypes*. It is automatically added with *clickOutside* feature.
+Forged components `<AppButton/>` and `<AppLayout/>` accepts *onClickOutside* prop. But *onClickOutsided* is not duplicated at  `<Button/>` and `<Layout/>` *propTypes*. It is automatically added with *clickOutside* feature.
 
 * Feature could be shared between components and applications. So there is no code duplication.
 
