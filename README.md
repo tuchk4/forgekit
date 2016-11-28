@@ -57,7 +57,8 @@ const Button = (children, ...props) => <button {...props}>{children}</button>;
 const ForgedButton = forgekit(Feature1, Feature2)(Button);
 ```
 
-ForgedButton *propTypes* and *defaultProps* are merged from all features and origin component:
+ForgedButton *propTypes* and *defaultProps* are merged from all features and origin component.
+Additional explanation at [forgekit-comopnents#little-explanation](https://github.com/tuchk4/forgekit-components#little-explanation)
 
 ```js
 ForgedButton.propTypes = {
@@ -295,7 +296,7 @@ npm install --save forgekit
 
 ## Forgekit components library
 
-I will contribute to Forgekit components library:
+I will contribute to [Forgekit components library](https://github.com/tuchk4/forgekit-components):
 
 * Develop all base components and features for them
 * Add styles according to Google Material design
@@ -316,3 +317,9 @@ Create Forgekit [react storybook](https://github.com/storybooks/react-storybook)
 Forgekit is still in the early stages and even still be an experimental project. Your are welcome to submit issue or PR if you have suggestions! Or write me on twitter [@tuchk4](https://twitter.com/tuchk4).
 
 :tada:
+
+
+## Referenced issues
+
+* Webpack: [CSS resolving order](https://github.com/webpack/webpack/issues/215)
+* React: [Feature request - PropType.*.name](https://github.com/facebook/react/issues/8310)
