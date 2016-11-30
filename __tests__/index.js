@@ -148,6 +148,7 @@ describe('Forge components with features', () => {
        */
       mock3Foo: 3,
       mock3Bar: '111',
+      'data-forged-component': true
     });
 
     // Expect feautre calls and arguments (props);
@@ -157,7 +158,7 @@ describe('Forge components with features', () => {
        * foo and bar should equals to component initialProps
        */
       foo: 1,
-      bar: '1',
+      bar: '1'
     });
 
     expect(featureMock2.mock.calls[0][0]).toEqual({
@@ -169,7 +170,7 @@ describe('Forge components with features', () => {
        * featureMock1 was called before featureMock1
        */
       mock1Foo: 1,
-      mock1Bar: '1',
+      mock1Bar: '1'
     });
 
     expect(featureMock3.mock.calls[0][0]).toEqual({
@@ -181,7 +182,7 @@ describe('Forge components with features', () => {
        * featureMock2 was called before featureMock3
        */
       mock2Foo: 2,
-      mock2Bar: '11',
+      mock2Bar: '11'
     });
   });
 
@@ -213,6 +214,7 @@ describe('Forge components with features', () => {
 
     expect(AwesomeComponent.mock.calls[0][0]).toEqual({
       foo: 'overridenFoo',
+      'data-forged-component': true,
       theme: {
         base: 'overridenBase',
       },
@@ -226,6 +228,7 @@ describe('Forge components with features', () => {
 
     expect(AwesomeComponent.mock.calls[1][0]).toEqual({
       foo: 'overridenFoo',
+      'data-forged-component': true,
       theme: {
         base: 'base',
       },

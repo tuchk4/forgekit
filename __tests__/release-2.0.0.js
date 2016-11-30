@@ -68,7 +68,8 @@ describe('Release 2.0.0: features as hocs and props + feature validation', () =>
 
     const ForgedComponent = features(AwesomeComponent);
     const initialProps = {
-      foo: 'foo'
+      foo: 'foo',
+      'data-forged-component': true
     };
 
     const tree = renderer.create(<ForgedComponent {...initialProps} />).toJSON();
@@ -130,6 +131,7 @@ describe('Release 2.0.0: features as hocs and props + feature validation', () =>
     const tree = renderer.create(<ForgedComponent {...initialProps} />).toJSON();
 
     expect(feature1.mock.calls[0][0]).toEqual(initialProps);
+
     expect(feature3.props.mock.calls[0][0]).toEqual({
       ...initialProps,
       feature1: 'feature1'
@@ -158,7 +160,7 @@ describe('Release 2.0.0: features as hocs and props + feature validation', () =>
     expect(tree.children[0].children[0].children[0]).toEqual('Hello');
   });
 
-  it ('Should throw exception id mountedProps function returns not object', () => {
+  it ('Should throw exception id bindProps function returns not object', () => {
     const feature1 = () => ({});
     const AwesomeComponent = () => <div>Hello</div>;
     const features = forge(feature1);
@@ -166,7 +168,7 @@ describe('Release 2.0.0: features as hocs and props + feature validation', () =>
 
     expect(() => {
       renderer.create(<ForgedComponent />);
-    }).toThrow(`Forgekit <${AwesomeComponent.name}/>: "mountedProps" as fucntions should return Object`);
+    }).toThrow(`Forgekit <${AwesomeComponent.name}/>: "bindProps" as fucntions should return Object`);
   });
 
   it ('Should throw excpetion if there are same props with differnet types', () => {

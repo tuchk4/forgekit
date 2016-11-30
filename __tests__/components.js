@@ -36,6 +36,7 @@ describe('Components tests', () => {
       'onClick',
       // from highlightFlags feature
       'style',
+      'data-forged-component'
     ]);
 
 
@@ -43,7 +44,7 @@ describe('Components tests', () => {
       /**
        * highlightFlags provide style color:red if "alert" flag exists
        */
-      color: 'red',
+      color: 'red'
     });
   });
 
