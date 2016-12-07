@@ -52,13 +52,13 @@ Forgekit suggest to develop and store features separately from components. There
 * Refactoring. It is more simpler to remove feature import than find and remove large number of related lines of code.
 * Refactoring. Old feature could be swapped with new features.
 * Optimization. Use only needed features. Not used features will not be in the build.
-* Feature customization. Each feature could be customized separately. This is much better that customize whole component.
+* Feature customization. Each feature could be customized separately. This is much better than customize whole component.
 
 
 ### High-level and low-level props
 
 In most cases feature depends and provide new props.
-Props could be splitted into **low-level** and **high-level** props.
+Props could be split into **low-level** and **high-level** props.
 
 From React [DOM Elements](https://facebook.github.io/react/docs/dom-elements.html) documentation:
 
