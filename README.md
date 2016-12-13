@@ -4,6 +4,8 @@
 
 **This project is still experimental, so feedback from component authors would be greatly appreciated!**
 
+<img src="http://i.imgur.com/ULoeOL4.png" height="16"/> [Forgekit at Medium](https://medium.com/@valeriy.sorokobatko/forgekit-785eb17a9b50#.bo3ijxdbm)
+
 ## Motivation
 
 [recompose](https://github.com/acdlite/recompose) had a great influence. It is great library that provide excellent way to lift state into functional wrappers, perform the most common React patterns, optimize rendering performance. Also it is possible to store common functions separately and share them between components. And as the result - component's source code become much more easier.
