@@ -1,5 +1,7 @@
 # <a href="https://github.com/tuchk4/forgekit"><img src="https://raw.githubusercontent.com/tuchk4/forgekit/master/logo/forgekit-logo-small.png"></a>
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tuchk4/forgekit.svg)](https://greenkeeper.io/)
+
 ![Forgekit travis build](https://api.travis-ci.org/tuchk4/forgekit.svg?branch=master)
 
 **This project is still experimental, so feedback from component authors would be greatly appreciated!**
